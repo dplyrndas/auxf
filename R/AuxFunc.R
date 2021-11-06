@@ -1,4 +1,7 @@
 pacman::p_load(tictoc, tidyverse, data.table)
+require(tictoc)
+require(tidyverse)
+require(data.table)
 # pacman::p_load_gh('dplyrndas/sourcens')
 
 verbose = T
@@ -6,6 +9,12 @@ verbose = T
 # Sys.setenv(TZ='America/Los_Angeles')
 # Sys.setenv(TZ='PDT') - doesn't work
 
+printmess <- function(x, text = NULL) {
+  if(!is.null(text))
+    print(text)
+
+  x
+}
 
 glprint <- function(x, isVerbose=F) {
   if(isVerbose)
@@ -15,7 +24,7 @@ glprint <- function(x, isVerbose=F) {
 
 gldim <- function(x, isVerbose=F) {
   if(isVerbose)
-    x %>% dim
+    x %>% dim %>% print
   invisible(x)
 }
 
