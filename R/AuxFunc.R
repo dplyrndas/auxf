@@ -16,13 +16,23 @@ printmess <- function(x, text = NULL) {
   x
 }
 
-glprint <- function(x, isVerbose=F) {
+glprint <- function(x) {
+  x %>% print
+  invisible(x)
+}
+
+gldim <- function(x) {
+  x %>% dim %>% print
+  invisible(x)
+}
+
+glprintv <- function(x, isVerbose=F) {
   if(isVerbose)
     x %>% print
   invisible(x)
 }
 
-gldim <- function(x, isVerbose=F) {
+gldimv <- function(x, isVerbose=F) {
   if(isVerbose)
     x %>% dim %>% print
   invisible(x)
