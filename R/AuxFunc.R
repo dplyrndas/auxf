@@ -1,7 +1,10 @@
 pacman::p_load(tictoc, tidyverse, data.table)
-require(tictoc)
-require(tidyverse)
-require(data.table)
+# require(tictoc)
+# require(tidyverse)
+# require(data.table)
+# usethis::use_package("magrittr") # Defaults to imports
+# usethis::use_package("pacman") # Defaults to imports
+
 # pacman::p_load_gh('dplyrndas/sourcens')
 
 verbose = T
