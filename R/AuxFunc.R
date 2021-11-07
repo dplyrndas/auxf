@@ -12,7 +12,6 @@ verbose = T
 printmess <- function(x, text = NULL) {
   if(!is.null(text))
     print(text)
-
   x
 }
 
