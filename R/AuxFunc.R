@@ -61,3 +61,8 @@ wtictoc <- function(x) {
   toc()
   res
 }
+
+
+formatPercNum <- function(x) round(x, 3) * 100
+formatPercStr <- function(x) paste0(round(x, 3) * 100, '%')
+objSize <- function(x) paste(as.numeric(object.size(x) / 1024^3) %>% round(2), 'Gbytes')
