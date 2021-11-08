@@ -66,3 +66,32 @@ wtictoc <- function(x) {
 formatPercNum <- function(x) round(x, 3) * 100
 formatPercStr <- function(x) paste0(round(x, 3) * 100, '%')
 objSize <- function(x) paste(as.numeric(object.size(x) / 1024^3) %>% round(2), 'Gbytes')
+
+
+# -------- BINOM---
+testBinom <- function() {
+  value = 35
+  groupSize = 51
+  binomValueFormat(5, 100)
+}
+
+binomSd <- function(value, groupSize) {
+  p = value / groupSize
+  p
+
+  variance = p * (1-p) / groupSize
+  variance #%>% print
+
+  sdValue = sqrt(groupSize * p * (1-p))
+  sdValue
+}
+
+binomValueSdFormat <- function(value, groupSize) {
+  sdValue = binomSd(value, groupSize)
+  sdValue
+
+  paste0(value, '±', sdValue)
+}
+
+
+
