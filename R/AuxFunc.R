@@ -1,8 +1,5 @@
-pacman::p_load(tictoc, tidyverse, data.table)
-# require(tictoc)
-# require(tidyverse)
-# require(data.table)
-# usethis::use_package("magrittr") # Defaults to imports
+pacman::p_load(qs, fst, tictoc, tidyverse, data.table)
+# usethis::use_package("fst") # Defaults to imports
 # usethis::use_package("pacman") # Defaults to imports
 
 # pacman::p_load_gh('dplyrndas/sourcens')
@@ -95,3 +92,19 @@ binomValueSdFormat <- function(value, groupSize) {
 
 
 
+# ---------------------SQL func---
+getSqlResultCacheFst <- function(conn, cacheFile, sqlQuery) {
+  if(!file.exists(cacheFile)) {
+    # source('../_common/connect_snowflake.R')
+    tic()
+    print('Downloading from db...')
+    fishCaughtTimeDat <- dbGetQuery(conn,sqlQuery) %>% data.table %>% glimpse
+    toc()
+    write.fst(fishCaughtTimeDat, cacheFile)
+    toc()
+  } else {
+    fishCaughtTimeDat <- read.fst(cacheFile) %>% data.table %>% glimpse
+  }
+  objSize(fishCaughtTimeDat) %>% print
+  fishCaughtTimeDat
+}
