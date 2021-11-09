@@ -100,7 +100,6 @@ getSqlResultCacheFst <- function(conn, cacheFile, sqlQuery, lowercaseCol = T) {
     print('Downloading from db...')
     fishCaughtTimeDat <- dbGetQuery(conn,sqlQuery) %>% data.table %>% glimpse
     toc()
-    fishCaughtTimeDat <- data.table(A = 4, b = 5)
     if(lowercaseCol) {
       colns <- colnames(fishCaughtTimeDat)
       fishCaughtTimeDat %>% setnames(colns %>% tolower)
