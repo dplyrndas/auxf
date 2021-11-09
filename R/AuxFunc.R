@@ -93,13 +93,18 @@ binomValueSdFormat <- function(value, groupSize) {
 
 
 # ---------------------SQL func---
-getSqlResultCacheFst <- function(conn, cacheFile, sqlQuery) {
+getSqlResultCacheFst <- function(conn, cacheFile, sqlQuery, lowercaseCol = T) {
   if(!file.exists(cacheFile)) {
     # source('../_common/connect_snowflake.R')
     tic()
     print('Downloading from db...')
     fishCaughtTimeDat <- dbGetQuery(conn,sqlQuery) %>% data.table %>% glimpse
     toc()
+    fishCaughtTimeDat <- data.table(A = 4, b = 5)
+    if(lowercaseCol) {
+      colns <- colnames(fishCaughtTimeDat)
+      fishCaughtTimeDat %>% setnames(colns %>% tolower)
+    }
     write.fst(fishCaughtTimeDat, cacheFile)
     toc()
   } else {
