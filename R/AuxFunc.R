@@ -112,3 +112,26 @@ getSqlResultCacheFst <- function(conn, cacheFile, sqlQuery, lowercaseCol = T) {
   objSize(fishCaughtTimeDat) %>% print
   fishCaughtTimeDat
 }
+
+
+
+# -----
+tablec <- function(x) {
+  # vec <- c(1, 1, 1, 2, 2, 3)
+  colnam <- substitute(x) %>% deparse# %>% glprint
+  dtt <- data.table()[, eval(colnam) := x][, .(N = .N), by=colnam][order(-N)]
+  # dtt[, colnam] <- x
+  # %>% print
+  # dtt <- data.table(colnam = x)[, .(N = .N), by=colnam][order(-N)]# %>% rename(colnam = 'colnam')
+  # !!sym(x) %>% print
+  dtt
+}
+
+tabledt <- function(dt, ...) {
+  lsArg <- match.call()
+  argsNames <- lapply(lsArg, function(x) as.character(x) %>% unlist) %>% unlist
+  namesOfArgsNames <- names(argsNames)
+  colNames <- argsNames[argsNames != 'tabledt' & namesOfArgsNames == '']
+  dt %>% data.table %>% .[, .(N = .N), by=colNames] %>% .[order(-N, get(colNames))]
+  # dt[, .(N = .N), by=colnams]
+}
