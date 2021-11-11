@@ -133,7 +133,8 @@ tabledt <- function(dt, ...) {
   argsNames <- lapply(lsArg, function(x) as.character(x) %>% unlist) %>% unlist
   namesOfArgsNames <- names(argsNames)
   colNames <- argsNames[argsNames != 'tabledt' & namesOfArgsNames == '']
-  dt %>% data.table %>% .[, .(N = .N), by=colNames] %>% .[order(-N, get(colNames))] %>%
+  dt %>% data.table %>% .[, .(N = .N), by=colNames] %>% .[order(-N)] %>%
+  # dt %>% data.table %>% .[, .(N = .N), by=colNames] %>% .[order(-N, get(colNames))] %>%
     mutate(Nperc = formatPercNum(N / sum(N)), NpercStr = formatPercStr(N / sum(N)))
   # dt[, .(N = .N), by=colnams]
 }
