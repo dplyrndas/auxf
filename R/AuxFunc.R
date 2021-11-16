@@ -98,12 +98,13 @@ getSqlResultCacheFst <- function(conn, cacheFile, sqlQuery, lowercaseCol = T) {
     # source('../_common/connect_snowflake.R')
     tic()
     print('Downloading from db...')
-    fishCaughtTimeDat <- dbGetQuery(conn,sqlQuery) %>% data.table %>% glimpse
+    fishCaughtTimeDat <- dbGetQuery(conn,sqlQuery) %>% data.table
     toc()
     if(lowercaseCol) {
       colns <- colnames(fishCaughtTimeDat)
       fishCaughtTimeDat %>% setnames(colns %>% tolower)
     }
+    fishCaughtTimeDat %>% glimpse
     write.fst(fishCaughtTimeDat, cacheFile)
     toc()
   } else {
