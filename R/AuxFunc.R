@@ -91,6 +91,16 @@ binomValueSdFormat <- function(value, groupSize) {
 }
 
 
+sfTime <- function() {
+  pb.date <- as.POSIXct(.POSIXct(Sys.time(), "GMT"),tz="GMT")
+  # convert it to PDT time zone
+  format(pb.date, tz="America/Los_Angeles",usetz=TRUE)
+}
+sfDate <- function() {
+  sfTime() %>% as.Date()
+}
+# print(paste0('CUR TIME(PACIFIC): ', sfTime()))
+#
 
 # ---------------------SQL func---
 getSqlResultCacheFst <- function(conn, cacheFile, sqlQuery, lowercaseCol = T) {
