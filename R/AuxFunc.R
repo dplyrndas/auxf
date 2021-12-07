@@ -1,4 +1,4 @@
-pacman::p_load(qs, fst, tictoc, tidyverse, data.table)
+pacman::p_load(glue, qs, fst, tictoc, tidyverse, data.table)
 # usethis::use_package("fst") # Defaults to imports
 # usethis::use_package("pacman") # Defaults to imports
 
@@ -52,13 +52,14 @@ na0 <- function(df) { x %>% naX(0) }
 
 maxNna <- function(x) { max(x, na.rm = T) }
 
-wtictoc <- function(x) {
+wtictoc <- function(x, mess = '') {
   tic()
   res <- x
+  if(mess != '') { print('{mess}:' %>% glue) }
   toc()
+
   res
 }
-
 
 formatPercNum <- function(x) round(x, 3) * 100
 formatPercStr <- function(x) paste0(round(x, 3) * 100, '%')
