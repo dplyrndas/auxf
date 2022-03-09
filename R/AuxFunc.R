@@ -104,12 +104,12 @@ sfDate <- function() {
 #
 
 # ---------------------SQL func---
-getSqlResultCacheFst <- function(conn, cacheFile, sqlQuery, lowercaseCol = T) {
+getSqlResultCacheFst <- function(conn, cacheFile, sqlQuery, params = list(), lowercaseCol = T) {
   if(!file.exists(cacheFile)) {
     # source('../_common/connect_snowflake.R')
     tic()
     print('Downloading from db...')
-    fishCaughtTimeDat <- dbGetQuery(conn,sqlQuery) %>% data.table
+    fishCaughtTimeDat <- dbGetQuery(conn,sqlQuery, params=params) %>% data.table
     toc()
     if(lowercaseCol) {
       colns <- colnames(fishCaughtTimeDat)
